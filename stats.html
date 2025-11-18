@@ -5,10 +5,11 @@
     <title>Stats - Blacket</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+    <!-- Firebase SDKs (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 
+    <!-- Firebase config -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
@@ -18,11 +19,9 @@
             messagingSenderId: "82935109494",
             appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
         };
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        firebase.initializeApp(firebaseConfig);
     </script>
 
-    <!-- Include main game script -->
     <script src="script.js" defer></script>
 </head>
 <body>
