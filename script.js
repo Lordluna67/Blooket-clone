@@ -31,28 +31,55 @@ function updateTokenDisplay() {
     if (tokensSpan) tokensSpan.textContent = getUserTokens();
 }
 
-function getDailySpin() {
+// =======================
+// Daily Spin (12-hour cooldown)
+// =======================
+function getDailySpinData() {
     const email = getUserEmail();
-    if (!email) return false;
-    return localStorage.getItem(email + "_dailySpin") === "true";
+    if (!email) return null;
+    const data = JSON.parse(localStorage.getItem(email + "_dailySpinData"));
+    return data || { lastSpin: 0, available: true };
 }
 
-function setDailySpin(value) {
+function setDailySpinData(data) {
     const email = getUserEmail();
     if (!email) return;
-    localStorage.setItem(email + "_dailySpin", value ? "true" : "false");
+    localStorage.setItem(email + "_dailySpinData", JSON.stringify(data));
+}
+
+function isDailySpinAvailable() {
+    const data = getDailySpinData();
+    if (!data) return false;
+    const now = Date.now();
+    const twelveHours = 12 * 60 * 60 * 1000;
+    if (now - data.lastSpin >= twelveHours) {
+        data.available = true;
+        setDailySpinData(data);
+    }
+    return data.available;
 }
 
 function spinDaily() {
-    if (!getDailySpin()) {
-        alert("Daily spin already used!");
+    if (!isDailySpinAvailable()) {
+        alert("Daily spin not available yet! Come back later.");
         return;
     }
     const reward = Math.floor(Math.random() * 20) + 1;
     alert(`You spun the daily wheel and earned ${reward} tokens!`);
     setUserTokens(getUserTokens() + reward);
-    setDailySpin(false);
-    updateTokenDisplay();
+
+    const data = getDailySpinData();
+    data.lastSpin = Date.now();
+    data.available = false;
+    setDailySpinData(data);
+
+    updateDailySpinDisplay();
+}
+
+function updateDailySpinDisplay() {
+    const span = document.getElementById("dailySpin");
+    if (!span) return;
+    span.textContent = isDailySpinAvailable() ? "Yes" : "No";
 }
 
 // =======================
@@ -74,13 +101,10 @@ function showTab(tabName) {
             const user = getCurrentUser();
             if(user) {
                 document.getElementById("user-email").textContent = "Email: " + user.email;
-                document.getElementById("tokens").textContent = getUserTokens();
-                document.getElementById("dailySpin").textContent = getDailySpin() ? "Yes" : "No";
+                updateTokenDisplay();
+                updateDailySpinDisplay();
 
-                document.getElementById("daily-spin-btn").addEventListener("click", () => {
-                    spinDaily();
-                    document.getElementById("dailySpin").textContent = getDailySpin() ? "Yes" : "No";
-                });
+                document.getElementById("daily-spin-btn").addEventListener("click", spinDaily);
             }
             break;
         case "market":
@@ -101,19 +125,16 @@ function logout() {
 }
 
 // =======================
-// Game Canvas
+// Game Canvas (placeholder)
 // =======================
 function setupGameCanvas() {
     const canvas = document.getElementById("gameCanvas");
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-
-    // Example: simple background
     ctx.fillStyle = "#222";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Example: moving token circle
     let x = canvas.width / 2;
     let y = canvas.height / 2;
     let dx = 2;
@@ -134,8 +155,8 @@ function setupGameCanvas() {
         x += dx;
         y += dy;
 
-        if (x + radius > canvas.width || x - radius < 0) dx = -dx;
-        if (y + radius > canvas.height || y - radius < 0) dy = -dy;
+        if(x + radius > canvas.width || x - radius < 0) dx = -dx;
+        if(y + radius > canvas.height || y - radius < 0) dy = -dy;
 
         requestAnimationFrame(animate);
     }
@@ -144,7 +165,7 @@ function setupGameCanvas() {
 }
 
 // =======================
-// Init
+// Initialize
 // =======================
 window.addEventListener("DOMContentLoaded", () => {
     firebase.auth().onAuthStateChanged(user => {
