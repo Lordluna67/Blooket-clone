@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="signup.js" defer></script>
+  <meta charset="utf-8" />
+  <title>Sign Up — Blacket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
 </head>
 <body>
-    <div class="box">
-        <h1>Create Account</h1>
-        <input id="email" type="email" placeholder="Email">
-        <input id="password" type="password" placeholder="Password">
-        <button id="signup-btn">Sign Up</button>
-        <p id="message"></p>
-    </div>
+  <div class="center-box">
+    <h1>Create Account</h1>
+    <input id="signup-email" type="email" placeholder="email@example.com" />
+    <input id="signup-password" type="password" placeholder="password (min 6)" />
+    <button id="signup-btn">Create account</button>
+    <p id="signup-message" class="message"></p>
+    <p>Already have an account? <a href="login.html">Log in</a></p>
+  </div>
 </body>
 </html>
