@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blacket-Inspired Login</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Login to Your Game</h1>
-    <form id="login-form">
-        <input type="text" id="username" placeholder="Enter username" required>
-        <button type="submit">Login</button>
-    </form>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-    <script src="login.js" defer></script>
-</body>
-</html>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
+    authDomain: "blacket-game.firebaseapp.com",
+    projectId: "blacket-game",
+    storageBucket: "blacket-game.firebasestorage.app",
+    messagingSenderId: "82935109494",
+    appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
