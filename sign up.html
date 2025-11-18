@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Blacket</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+
+    <script>
+        // Firebase config (same as before)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
+            authDomain: "blacket-game.firebaseapp.com",
+            projectId: "blacket-game",
+            storageBucket: "blacket-game.firebasestorage.app",
+            messagingSenderId: "82935109494",
+            appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
+</head>
+<body>
+    <div id="signup-container">
+        <h1>Sign Up</h1>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <button id="register-btn">Create Account</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const registerBtn = document.getElementById("register-btn");
+        const message = document.getElementById("message");
+
+        registerBtn.addEventListener("click", () => {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(() => {
+                    // Initialize user tokens
+                    localStorage.setItem(email + "_tokens", 500);
+                    localStorage.setItem(email + "_dailySpin", "true");
+                    window.location.href = "stats.html";
+                })
+                .catch(error => {
+                    message.textContent = error.message;
+                });
+        });
+    </script>
+</body>
+</html>
