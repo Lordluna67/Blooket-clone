@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
 
+    <!-- Firebase config -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
@@ -21,6 +22,9 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
     </script>
+
+    <!-- Include login JS -->
+    <script src="login.js" defer></script>
 </head>
 <body>
     <div id="login-container">
@@ -31,21 +35,5 @@
         <button id="signup-btn">Sign Up</button>
         <p id="message"></p>
     </div>
-
-    <script>
-        const loginBtn = document.getElementById("login-btn");
-        const signupBtn = document.getElementById("signup-btn");
-        const message = document.getElementById("message");
-
-        loginBtn.addEventListener("click", () => {
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(() => window.location.href = "stats.html")
-                .catch(err => message.textContent = err.message);
-        });
-
-        signupBtn.addEventListener("click", () => window.location.href = "signup.html");
-    </script>
 </body>
 </html>
