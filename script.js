@@ -16,7 +16,7 @@ function getUserEmail() {
 function getUserTokens() {
     const email = getUserEmail();
     if (!email) return 0;
-    return parseInt(localStorage.getItem(email + "_tokens")) || 500;
+    return parseInt(localStorage.getItem(email + "_tokens")) || 0;
 }
 
 function setUserTokens(amount) {
@@ -64,7 +64,8 @@ function spinDaily() {
         alert("Daily spin not available yet! Come back later.");
         return;
     }
-    const reward = Math.floor(Math.random() * 20) + 1;
+    // Reward 500-1000 tokens
+    const reward = Math.floor(Math.random() * 501) + 500; // 500–1000
     alert(`You spun the daily wheel and earned ${reward} tokens!`);
     setUserTokens(getUserTokens() + reward);
 
@@ -105,7 +106,7 @@ function updateDailySpinDisplay() {
     const available = isDailySpinAvailable();
     span.textContent = available ? "Yes" : "No";
 
-    // Add countdown timer in parentheses if not available
+    // Countdown if not available
     if (!available) {
         const remaining = getRemainingSpinTime();
         span.textContent += ` (${formatTime(remaining)} until next spin)`;
@@ -136,6 +137,19 @@ function showTab(tabName) {
             `;
             const user = getCurrentUser();
             if(user) {
+                const email = getUserEmail();
+
+                // Initialize tokens to 0 if not set
+                if (!localStorage.getItem(email + "_tokens")) {
+                    localStorage.setItem(email + "_tokens", 0);
+                }
+
+                // Initialize daily spin available immediately if not set
+                if (!localStorage.getItem(email + "_dailySpinData")) {
+                    const data = { lastSpin: 0, available: true };
+                    localStorage.setItem(email + "_dailySpinData", JSON.stringify(data));
+                }
+
                 document.getElementById("user-email").textContent = "Email: " + user.email;
                 updateTokenDisplay();
                 updateDailySpinDisplay();
