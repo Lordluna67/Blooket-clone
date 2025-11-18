@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Stats - Blacket</title>
+    <title>Your Stats</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js" defer></script>
 </head>
 <body>
-    <div id="tabs">
-        <button onclick="showTab('stats')">Stats</button>
-        <button onclick="showTab('market')">Market</button>
-        <button onclick="showTab('bizzar')">Bizzar</button>
-        <button onclick="showTab('blooks')">Blooks</button>
-        <button onclick="logout()">Logout</button>
+    <div class="box">
+        <h1>Your Stats</h1>
+
+        <p><strong>Tokens:</strong> <span id="tokens">0</span></p>
+
+        <h2>Daily Spin</h2>
+        <button id="spin-btn">Spin Wheel</button>
+        <p id="spin-result"></p>
+        <p id="spin-timer"></p>
     </div>
-
-    <h1 id="tab-title">Stats</h1>
-    <div id="tab-content"></div>
-    <canvas id="gameCanvas" width="600" height="400"></canvas>
-
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
