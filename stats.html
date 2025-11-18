@@ -6,15 +6,29 @@
     <script type="module" src="script.js" defer></script>
 </head>
 <body>
-    <div class="box">
-        <h1>Your Stats</h1>
-
-        <p><strong>Tokens:</strong> <span id="tokens">0</span></p>
-
-        <h2>Daily Spin</h2>
-        <button id="spin-btn">Spin Wheel</button>
-        <p id="spin-result"></p>
-        <p id="spin-timer"></p>
+    <div id="sidebar">
+        <h2>Menu</h2>
+        <a href="stats.html">Stats</a>
+        <a href="market.html">Market</a>
+        <a href="bizzar.html">Bizzar</a>
+        <a href="blooks.html">Blooks</a>
+        <a href="login.html" id="logout">Logout</a>
     </div>
+
+    <div id="content">
+        <div class="box">
+            <h1>Your Stats</h1>
+
+            <p><strong>Tokens:</strong> <span id="tokens">0</span></p>
+
+            <h2>Daily Spin</h2>
+            <button id="spin-btn">Spin Wheel</button>
+            <p id="spin-result"></p>
+            <p id="spin-timer"></p>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js" defer></script>
 </body>
 </html>
