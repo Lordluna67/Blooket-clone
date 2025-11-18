@@ -1,5 +1,5 @@
 // =======================
-// Auth & User Helpers
+// Helper Functions
 // =======================
 function getCurrentUser() {
     return firebase.auth().currentUser;
@@ -11,7 +11,7 @@ function getUserEmail() {
 }
 
 // =======================
-// Token & Daily Spin Logic
+// Token Functions
 // =======================
 function getUserTokens() {
     const email = getUserEmail();
@@ -32,7 +32,7 @@ function updateTokenDisplay() {
 }
 
 // =======================
-// Daily Spin (12-hour cooldown)
+// Daily Spin Functions
 // =======================
 function getDailySpinData() {
     const email = getUserEmail();
@@ -64,8 +64,7 @@ function spinDaily() {
         alert("Daily spin not available yet! Come back later.");
         return;
     }
-    // Reward 500-1000 tokens
-    const reward = Math.floor(Math.random() * 501) + 500; // 500–1000
+    const reward = Math.floor(Math.random() * 501) + 500; // 500–1000 tokens
     alert(`You spun the daily wheel and earned ${reward} tokens!`);
     setUserTokens(getUserTokens() + reward);
 
@@ -106,21 +105,19 @@ function updateDailySpinDisplay() {
     const available = isDailySpinAvailable();
     span.textContent = available ? "Yes" : "No";
 
-    // Countdown if not available
     if (!available) {
         const remaining = getRemainingSpinTime();
         span.textContent += ` (${formatTime(remaining)} until next spin)`;
     }
 }
 
-// Update countdown every second
 setInterval(() => {
     const span = document.getElementById("dailySpin");
     if (span) updateDailySpinDisplay();
 }, 1000);
 
 // =======================
-// Tabs Logic
+// Tabs
 // =======================
 function showTab(tabName) {
     const main = document.getElementById("tab-content");
@@ -139,15 +136,12 @@ function showTab(tabName) {
             if(user) {
                 const email = getUserEmail();
 
-                // Initialize tokens to 0 if not set
+                // Initialize tokens & daily spin if not present
                 if (!localStorage.getItem(email + "_tokens")) {
                     localStorage.setItem(email + "_tokens", 0);
                 }
-
-                // Initialize daily spin available immediately if not set
                 if (!localStorage.getItem(email + "_dailySpinData")) {
-                    const data = { lastSpin: 0, available: true };
-                    localStorage.setItem(email + "_dailySpinData", JSON.stringify(data));
+                    localStorage.setItem(email + "_dailySpinData", JSON.stringify({ lastSpin: 0, available: true }));
                 }
 
                 document.getElementById("user-email").textContent = "Email: " + user.email;
@@ -157,11 +151,13 @@ function showTab(tabName) {
                 document.getElementById("daily-spin-btn").addEventListener("click", spinDaily);
             }
             break;
+
         case "market":
         case "bizzar":
         case "blooks":
             main.innerHTML = `<p>${tabName} page coming soon!</p>`;
             break;
+
         default:
             main.innerHTML = `<p>Unknown tab</p>`;
     }
@@ -175,7 +171,7 @@ function logout() {
 }
 
 // =======================
-// Game Canvas (placeholder)
+// Game Canvas Placeholder
 // =======================
 function setupGameCanvas() {
     const canvas = document.getElementById("gameCanvas");
