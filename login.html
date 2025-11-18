@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login - Blacket</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="login.js" defer></script>
 </head>
 <body>
-    <div id="login-container">
-        <h1>Login</h1>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button id="login-btn">Login</button>
-        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    <div class="box">
+        <h1>Log In</h1>
+        <input id="email" type="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+        <button id="login-btn">Log In</button>
         <p id="message"></p>
     </div>
-
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
-    <script src="login.js"></script>
 </body>
 </html>
