@@ -1,7 +1,43 @@
-body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
-#login-container, #signup-container, #welcome-container { max-width: 400px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
-input { margin: 5px 0; padding: 8px; width: 90%; }
-button { margin: 5px; padding: 8px 12px; cursor: pointer; }
-#tabs { width: 200px; border-right: 1px solid #ccc; padding: 10px; float: left; }
-#tabs button { display: block; width: 100%; margin-bottom: 5px; }
-#main { margin-left: 210px; padding: 20px; }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffcc00;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #ffaa00;
+}
+
+#tabs {
+    margin-bottom: 20px;
+}
+
+#tabs button {
+    margin: 0 5px;
+}
+
+#gameCanvas {
+    border: 2px solid #fff;
+    margin-top: 20px;
+}
