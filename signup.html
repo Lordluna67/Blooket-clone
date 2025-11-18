@@ -5,9 +5,9 @@
     <title>Sign Up - Blacket</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+    <!-- Firebase SDKs (compat version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 
     <!-- Firebase config -->
     <script>
@@ -19,12 +19,10 @@
             messagingSenderId: "82935109494",
             appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
         };
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        firebase.initializeApp(firebaseConfig);
     </script>
 
-    <!-- Include signup JS -->
-    <script src="sign-up.js" defer></script>
+    <script src="signup.js" defer></script>
 </head>
 <body>
     <div id="signup-container">
