@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blacket Login</title>
+    <title>Login - Blacket</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
 
     <script>
-        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
             authDomain: "blacket-game.firebaseapp.com",
@@ -19,8 +18,6 @@
             messagingSenderId: "82935109494",
             appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
         };
-
-        // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
     </script>
@@ -28,8 +25,8 @@
 <body>
     <div id="login-container">
         <h1>Login</h1>
-        <input type="email" id="email" placeholder="Email" required><br>
-        <input type="password" id="password" placeholder="Password" required><br>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
         <button id="login-btn">Login</button>
         <button id="signup-btn">Sign Up</button>
         <p id="message"></p>
@@ -43,19 +40,12 @@
         loginBtn.addEventListener("click", () => {
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value;
-
             firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    window.location.href = "stats.html"; // go to stats page after login
-                })
-                .catch(error => {
-                    message.textContent = error.message;
-                });
+                .then(() => window.location.href = "stats.html")
+                .catch(err => message.textContent = err.message);
         });
 
-        signupBtn.addEventListener("click", () => {
-            window.location.href = "signup.html"; // go to signup page
-        });
+        signupBtn.addEventListener("click", () => window.location.href = "signup.html");
     </script>
 </body>
 </html>
