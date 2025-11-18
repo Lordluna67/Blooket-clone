@@ -2,18 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Blooket Game</title>
+    <title>Blacket Game</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+
+    <script>
+        // Your Firebase config (use the snippet you provided)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
+            authDomain: "blacket-game.firebaseapp.com",
+            projectId: "blacket-game",
+            storageBucket: "blacket-game.firebasestorage.app",
+            messagingSenderId: "82935109494",
+            appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
 </head>
 <body>
-    <h1>Welcome to My Blooket Clone!</h1>
-    <p id="score">Score: 0</p>
+    <!-- User display -->
+    <p id="user-display"></p>
 
-    <div id="question-container">
-        <p id="question">Click the button to start the game!</p>
-        <button id="next-button">Next Question</button>
+    <!-- Your game content goes here -->
+    <div id="game-container">
+        <!-- Example: placeholder text -->
+        <p>Welcome to Blacket! Your game will appear here.</p>
     </div>
 
-    <script src="script.js" defer></script>
+    <script>
+        // Check login status
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is logged in
+                document.getElementById("user-display").textContent = "Logged in as: " + user.email;
+
+                // Example: Load tokens from localStorage
+                if (!localStorage.getItem(user.email + "_tokens")) {
+                    localStorage.setItem(user.email + "_tokens", 500); // starting tokens
+                }
+            } else {
+                // No user logged in, redirect to login page
+                window.location.href = "login.html";
+            }
+        });
+
+        // Example functions to get/set tokens per user
+        function getUserTokens() {
+            const user = firebase.auth().currentUser;
+            if (!user) return 0;
+            return parseInt(localStorage.getItem(user.email + "_tokens")) || 500;
+        }
+
+        function setUserTokens(amount) {
+            const user = firebase.auth().currentUser;
+            if (!user) return;
+            localStorage.setItem(user.email + "_tokens", amount);
+        }
+    </script>
 </body>
 </html>
