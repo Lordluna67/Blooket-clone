@@ -1,6 +1,3 @@
-for cleaner code. Here’s what should go in login.js:
-
-login.js
 // Get HTML elements
 const loginBtn = document.getElementById("login-btn");
 const signupBtn = document.getElementById("signup-btn");
