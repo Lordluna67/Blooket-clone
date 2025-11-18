@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="login.js" defer></script>
+  <meta charset="utf-8" />
+  <title>Login — Blacket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
 </head>
 <body>
-    <div class="box">
-        <h1>Log In</h1>
-        <input id="email" type="email" placeholder="Email">
-        <input id="password" type="password" placeholder="Password">
-        <button id="login-btn">Log In</button>
-        <p id="message"></p>
-    </div>
+  <div class="center-box">
+    <h1>Login</h1>
+    <input id="login-email" type="email" placeholder="email@example.com" />
+    <input id="login-password" type="password" placeholder="password" />
+    <button id="login-btn">Log in</button>
+    <p id="login-message" class="message"></p>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
 </body>
 </html>
