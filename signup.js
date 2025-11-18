@@ -12,10 +12,11 @@ registerBtn.addEventListener("click", () => {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
-            // initialize user stats
+            // Initialize tokens and daily spin
             localStorage.setItem(email + "_tokens", 500);
             localStorage.setItem(email + "_dailySpin", "true");
-            // redirect to stats page
+
+            // Redirect to stats page
             window.location.href = "stats.html";
         })
         .catch(err => {
