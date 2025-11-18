@@ -1,5 +1,5 @@
 body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
-#login-container, #signup-container { max-width: 400px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
+#login-container, #signup-container, #welcome-container { max-width: 400px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
 input { margin: 5px 0; padding: 8px; width: 90%; }
 button { margin: 5px; padding: 8px 12px; cursor: pointer; }
 #tabs { width: 200px; border-right: 1px solid #ccc; padding: 10px; float: left; }
