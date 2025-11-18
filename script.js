@@ -1,11 +1,14 @@
+// Redirect if not logged in
 const currentUser = localStorage.getItem("currentUser");
 if (!currentUser) window.location.href = "login.html";
 
+// DOM elements
 const tokensEl = document.getElementById("tokens");
 const spinBtn = document.getElementById("spin-btn");
 const spinResult = document.getElementById("spin-result");
 const spinTimer = document.getElementById("spin-timer");
 
+// TOKEN FUNCTIONS
 function getTokens() {
     return Number(localStorage.getItem(currentUser + "_tokens")) || 0;
 }
@@ -13,6 +16,7 @@ function setTokens(amount) {
     localStorage.setItem(currentUser + "_tokens", amount);
 }
 
+// SPIN FUNCTIONS
 function getNextSpin() {
     return Number(localStorage.getItem(currentUser + "_nextSpin")) || 0;
 }
@@ -24,6 +28,7 @@ function updateTokensDisplay() {
     tokensEl.textContent = getTokens();
 }
 
+// TIMER UPDATE
 function updateTimer() {
     const now = Date.now();
     const nextSpin = getNextSpin();
@@ -35,34 +40,50 @@ function updateTimer() {
     }
 
     let remaining = nextSpin - now;
-
     const hours = Math.floor(remaining / (1000 * 60 * 60));
     remaining %= (1000 * 60 * 60);
+
     const minutes = Math.floor(remaining / (1000 * 60));
     remaining %= (1000 * 60);
+
     const seconds = Math.floor(remaining / 1000);
 
     spinTimer.textContent = `Next spin in ${hours}h ${minutes}m ${seconds}s`;
     spinBtn.disabled = true;
 }
 
-setInterval(updateTimer, 1000);
+// INITIAL LOAD
 updateTokensDisplay();
 updateTimer();
+setInterval(updateTimer, 1000);
 
-spinBtn.addEventListener("click", () => {
-    const now = Date.now();
-    const nextSpin = getNextSpin();
+// SPIN BUTTON
+if (spinBtn) {
+    spinBtn.addEventListener("click", () => {
+        const now = Date.now();
+        const nextSpin = getNextSpin();
 
-    if (now < nextSpin) return;
+        if (now < nextSpin) return;
 
-    const reward = Math.floor(Math.random() * 501) + 500; // 500–1000
-    setTokens(getTokens() + reward);
-    updateTokensDisplay();
+        const reward = Math.floor(Math.random() * 501) + 500; // 500–1000
 
-    spinResult.textContent = `You won ${reward} tokens!`;
+        setTokens(getTokens() + reward);
+        updateTokensDisplay();
 
-    const twelveHours = 12 * 60 * 60 * 1000;
-    setNextSpin(now + twelveHours);
-    updateTimer();
-});
+        spinResult.textContent = `You won ${reward} tokens!`;
+
+        const twelveHours = 12 * 60 * 60 * 1000;
+        setNextSpin(now + twelveHours);
+
+        updateTimer();
+    });
+}
+
+// LOGOUT BUTTON
+const logoutBtn = document.getElementById("logout");
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("currentUser");
+        window.location.href = "login.html";
+    });
+}
