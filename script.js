@@ -76,11 +76,47 @@ function spinDaily() {
     updateDailySpinDisplay();
 }
 
+// =======================
+// Countdown Timer
+// =======================
+function getRemainingSpinTime() {
+    const data = getDailySpinData();
+    if (!data) return 0;
+    const now = Date.now();
+    const twelveHours = 12 * 60 * 60 * 1000;
+    const elapsed = now - data.lastSpin;
+    const remaining = Math.max(twelveHours - elapsed, 0);
+    return remaining;
+}
+
+function formatTime(ms) {
+    let totalSeconds = Math.floor(ms / 1000);
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    totalSeconds %= 3600;
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+}
+
 function updateDailySpinDisplay() {
     const span = document.getElementById("dailySpin");
     if (!span) return;
-    span.textContent = isDailySpinAvailable() ? "Yes" : "No";
+
+    const available = isDailySpinAvailable();
+    span.textContent = available ? "Yes" : "No";
+
+    // Add countdown timer in parentheses if not available
+    if (!available) {
+        const remaining = getRemainingSpinTime();
+        span.textContent += ` (${formatTime(remaining)} until next spin)`;
+    }
 }
+
+// Update countdown every second
+setInterval(() => {
+    const span = document.getElementById("dailySpin");
+    if (span) updateDailySpinDisplay();
+}, 1000);
 
 // =======================
 // Tabs Logic
