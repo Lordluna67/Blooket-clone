@@ -1,1 +1,28 @@
+let score = 0;
+const questions = [
+    { q: "What is 2 + 2?", a: "4" },
+    { q: "What is the capital of France?", a: "Paris" },
+    { q: "What color is the sky?", a: "Blue" }
+];
 
+let current = 0;
+
+const questionEl = document.getElementById("question");
+const scoreEl = document.getElementById("score");
+const nextButton = document.getElementById("next-button");
+
+nextButton.addEventListener("click", () => {
+    if (current < questions.length) {
+        questionEl.textContent = questions[current].q;
+        let answer = prompt("Your answer:");
+        if (answer && answer.trim().toLowerCase() === questions[current].a.toLowerCase()) {
+            score += 10;
+            scoreEl.textContent = "Score: " + score;
+        }
+        current++;
+        if (current >= questions.length) {
+            questionEl.textContent = "Game Over! Final score: " + score;
+            nextButton.disabled = true;
+        }
+    }
+});
