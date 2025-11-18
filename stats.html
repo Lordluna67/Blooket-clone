@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Stats</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="script.js" defer></script>
+  <meta charset="utf-8" />
+  <title>Stats — Blacket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-    <div id="sidebar">
-        <h2>Menu</h2>
-        <a href="stats.html">Stats</a>
-        <a href="market.html">Market</a>
-        <a href="bizzar.html">Bizzar</a>
-        <a href="blooks.html">Blooks</a>
-        <a href="login.html" id="logout">Logout</a>
+  <div id="sidebar">
+    <h2>Menu</h2>
+    <button class="side-btn" data-target="stats">Stats</button>
+    <button class="side-btn" data-target="market">Market</button>
+    <button class="side-btn" data-target="bizzar">Bizzar</button>
+    <button class="side-btn" data-target="blooks">Blooks</button>
+    <button id="logout-btn" class="side-btn">Logout</button>
+  </div>
+
+  <div id="content">
+    <div id="main-box" class="box">
+      <h1 id="page-title">Stats</h1>
+
+      <div id="page-content">
+        <!-- Stats content injected by app.js -->
+      </div>
+
+      <canvas id="gameCanvas" width="600" height="320" style="display:block; margin-top:18px;"></canvas>
     </div>
-
-    <div id="content">
-        <div class="box">
-            <h1>Your Stats</h1>
-
-            <p><strong>Tokens:</strong> <span id="tokens">0</span></p>
-
-            <h2>Daily Spin</h2>
-            <button id="spin-btn">Spin Wheel</button>
-            <p id="spin-result"></p>
-            <p id="spin-timer"></p>
-        </div>
-    </div>
-
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="script.js" defer></script>
+  </div>
 </body>
 </html>
