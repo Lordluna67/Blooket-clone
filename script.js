@@ -1,17 +1,156 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px;
-    background-color: #f0f8ff;
+// =======================
+// Auth & User Helpers
+// =======================
+function getCurrentUser() {
+    return firebase.auth().currentUser;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
+function getUserEmail() {
+    const user = getCurrentUser();
+    return user ? user.email : null;
 }
 
-#question-container {
-    margin-top: 30px;
+// =======================
+// Token & Daily Spin Logic
+// =======================
+function getUserTokens() {
+    const email = getUserEmail();
+    if (!email) return 0;
+    return parseInt(localStorage.getItem(email + "_tokens")) || 500;
 }
+
+function setUserTokens(amount) {
+    const email = getUserEmail();
+    if (!email) return;
+    localStorage.setItem(email + "_tokens", amount);
+    updateTokenDisplay();
+}
+
+function updateTokenDisplay() {
+    const tokensSpan = document.getElementById("tokens");
+    if (tokensSpan) tokensSpan.textContent = getUserTokens();
+}
+
+function getDailySpin() {
+    const email = getUserEmail();
+    if (!email) return false;
+    return localStorage.getItem(email + "_dailySpin") === "true";
+}
+
+function setDailySpin(value) {
+    const email = getUserEmail();
+    if (!email) return;
+    localStorage.setItem(email + "_dailySpin", value ? "true" : "false");
+}
+
+function spinDaily() {
+    if (!getDailySpin()) {
+        alert("Daily spin already used!");
+        return;
+    }
+    const reward = Math.floor(Math.random() * 20) + 1;
+    alert(`You spun the daily wheel and earned ${reward} tokens!`);
+    setUserTokens(getUserTokens() + reward);
+    setDailySpin(false);
+    updateTokenDisplay();
+}
+
+// =======================
+// Tabs Logic
+// =======================
+function showTab(tabName) {
+    const main = document.getElementById("tab-content");
+    const title = document.getElementById("tab-title");
+    title.textContent = tabName.charAt(0).toUpperCase() + tabName.slice(1);
+
+    switch(tabName) {
+        case "stats":
+            main.innerHTML = `
+                <p id="user-email"></p>
+                <p>Tokens: <span id="tokens">0</span></p>
+                <p>Daily Spin Available: <span id="dailySpin">Yes</span></p>
+                <button id="daily-spin-btn">Spin Daily Wheel</button>
+            `;
+            const user = getCurrentUser();
+            if(user) {
+                document.getElementById("user-email").textContent = "Email: " + user.email;
+                document.getElementById("tokens").textContent = getUserTokens();
+                document.getElementById("dailySpin").textContent = getDailySpin() ? "Yes" : "No";
+
+                document.getElementById("daily-spin-btn").addEventListener("click", () => {
+                    spinDaily();
+                    document.getElementById("dailySpin").textContent = getDailySpin() ? "Yes" : "No";
+                });
+            }
+            break;
+        case "market":
+        case "bizzar":
+        case "blooks":
+            main.innerHTML = `<p>${tabName} page coming soon!</p>`;
+            break;
+        default:
+            main.innerHTML = `<p>Unknown tab</p>`;
+    }
+}
+
+// =======================
+// Logout
+// =======================
+function logout() {
+    firebase.auth().signOut().then(() => window.location.href = "login.html");
+}
+
+// =======================
+// Game Canvas
+// =======================
+function setupGameCanvas() {
+    const canvas = document.getElementById("gameCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    // Example: simple background
+    ctx.fillStyle = "#222";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Example: moving token circle
+    let x = canvas.width / 2;
+    let y = canvas.height / 2;
+    let dx = 2;
+    let dy = 2;
+    const radius = 20;
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#222";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "gold";
+        ctx.fill();
+        ctx.closePath();
+
+        x += dx;
+        y += dy;
+
+        if (x + radius > canvas.width || x - radius < 0) dx = -dx;
+        if (y + radius > canvas.height || y - radius < 0) dy = -dy;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+// =======================
+// Init
+// =======================
+window.addEventListener("DOMContentLoaded", () => {
+    firebase.auth().onAuthStateChanged(user => {
+        if(!user) window.location.href = "login.html";
+        if(user) showTab("stats");
+    });
+
+    setupGameCanvas();
+});
