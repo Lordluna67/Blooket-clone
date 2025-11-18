@@ -41,3 +41,40 @@ button:hover {
     border: 2px solid #fff;
     margin-top: 20px;
 }
+/* SIDEBAR */
+#sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 100%;
+    background: #202020;
+    color: white;
+    padding: 20px;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    background: #333;
+    border-radius: 6px;
+}
+
+#sidebar a:hover {
+    background: #444;
+}
+
+/* MAIN CONTENT */
+#content {
+    margin-left: 200px;
+    padding: 20px;
+}
