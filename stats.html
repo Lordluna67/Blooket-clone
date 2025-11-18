@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Stats - Blacket</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Firebase SDKs -->
+
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
 
@@ -18,10 +17,10 @@
             messagingSenderId: "82935109494",
             appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
         };
-
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
     </script>
+
     <style>
         body { display: flex; font-family: sans-serif; }
         #tabs { width: 200px; border-right: 1px solid #ccc; padding: 10px; }
@@ -30,7 +29,6 @@
     </style>
 </head>
 <body>
-    <!-- Left Tab Panel -->
     <div id="tabs">
         <button onclick="showTab('market')">Market</button>
         <button onclick="showTab('bizzar')">Bizzar</button>
@@ -39,7 +37,6 @@
         <button onclick="logout()">Logout</button>
     </div>
 
-    <!-- Main Panel -->
     <div id="main">
         <h2 id="tab-title">Stats</h2>
         <div id="tab-content">
@@ -50,47 +47,27 @@
     </div>
 
     <script>
-        // Auth check
         firebase.auth().onAuthStateChanged(user => {
-            if (!user) window.location.href = "login.html";
-
-            if (user) {
-                document.getElementById("user-email").textContent = "Email: " + user.email;
-                // Tokens
-                if (!localStorage.getItem(user.email + "_tokens")) localStorage.setItem(user.email + "_tokens", 500);
-                document.getElementById("tokens").textContent = localStorage.getItem(user.email + "_tokens");
-                // Daily spin
-                if (!localStorage.getItem(user.email + "_dailySpin")) localStorage.setItem(user.email + "_dailySpin", "true");
-                document.getElementById("dailySpin").textContent = localStorage.getItem(user.email + "_dailySpin") === "true" ? "Yes" : "No";
-            }
+            if(!user) window.location.href = "login.html";
+            else updateStats(user);
         });
 
-        function logout() {
-            firebase.auth().signOut().then(() => {
-                window.location.href = "login.html";
-            });
+        function updateStats(user){
+            document.getElementById("user-email").textContent = "Email: " + user.email;
+            if(!localStorage.getItem(user.email + "_tokens")) localStorage.setItem(user.email + "_tokens", 500);
+            document.getElementById("tokens").textContent = localStorage.getItem(user.email + "_tokens");
+            if(!localStorage.getItem(user.email + "_dailySpin")) localStorage.setItem(user.email + "_dailySpin", "true");
+            document.getElementById("dailySpin").textContent = localStorage.getItem(user.email + "_dailySpin") === "true" ? "Yes" : "No";
         }
 
-        function showTab(tabName) {
+        function logout(){ firebase.auth().signOut().then(()=>window.location.href="login.html"); }
+
+        function showTab(tabName){
             const main = document.getElementById("tab-content");
             const title = document.getElementById("tab-title");
             title.textContent = tabName.charAt(0).toUpperCase() + tabName.slice(1);
-            if(tabName === 'stats') {
-                main.innerHTML = `
-                    <p id="user-email"></p>
-                    <p>Tokens: <span id="tokens">0</span></p>
-                    <p>Daily Spin Available: <span id="dailySpin">Yes</span></p>
-                `;
-                // Update values
-                const user = firebase.auth().currentUser;
-                if(user) {
-                    document.getElementById("user-email").textContent = "Email: " + user.email;
-                    document.getElementById("tokens").textContent = localStorage.getItem(user.email + "_tokens");
-                    document.getElementById("dailySpin").textContent = localStorage.getItem(user.email + "_dailySpin") === "true" ? "Yes" : "No";
-                }
-            } else {
-                main.innerHTML = `<p>${tabName} page coming soon!</p>`;
-            }
+            if(tabName === "stats") updateStats(firebase.auth().currentUser);
+            else main.innerHTML = `<p>${tabName} page coming soon!</p>`;
         }
     </script>
 </body>
