@@ -1,95 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Blacket Game</title>
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
-
-    <script>
-        // Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
-            authDomain: "blacket-game.firebaseapp.com",
-            projectId: "blacket-game",
-            storageBucket: "blacket-game.firebasestorage.app",
-            messagingSenderId: "82935109494",
-            appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-    </script>
+    <meta http-equiv="refresh" content="0; URL='login.html'" />
 </head>
 <body>
-    <!-- Logged-in user display -->
-    <p id="user-display"></p>
-
-    <!-- Game container -->
-    <div id="game-container">
-        <!-- Example game elements -->
-        <canvas id="gameCanvas" width="600" height="400" style="border:1px solid #000;"></canvas>
-        <div id="score">
-            Tokens: <span id="tokens">0</span>
-        </div>
-        <button id="earnTokenBtn">Earn Token</button>
-    </div>
-
-    <script>
-        // Check login status
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                document.getElementById("user-display").textContent = "Logged in as: " + user.email;
-
-                // Initialize tokens if not set
-                if (!localStorage.getItem(user.email + "_tokens")) {
-                    localStorage.setItem(user.email + "_tokens", 500);
-                }
-                updateTokenDisplay();
-            } else {
-                // Redirect to login if not logged in
-                window.location.href = "login.html";
-            }
-        });
-
-        // Token functions
-        function getUserTokens() {
-            const user = firebase.auth().currentUser;
-            if (!user) return 0;
-            return parseInt(localStorage.getItem(user.email + "_tokens")) || 500;
-        }
-
-        function setUserTokens(amount) {
-            const user = firebase.auth().currentUser;
-            if (!user) return;
-            localStorage.setItem(user.email + "_tokens", amount);
-            updateTokenDisplay();
-        }
-
-        function updateTokenDisplay() {
-            document.getElementById("tokens").textContent = getUserTokens();
-        }
-
-        // Example game logic: earn a token
-        const earnBtn = document.getElementById("earnTokenBtn");
-        earnBtn.addEventListener("click", () => {
-            const current = getUserTokens();
-            setUserTokens(current + 1); // increase tokens
-        });
-
-        // Here you can add your actual Blacket game logic
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        // Example: draw background
-        ctx.fillStyle = "#222";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // TODO: Add your Blacket game elements here
-    </script>
+    Redirecting to login...
 </body>
 </html>
