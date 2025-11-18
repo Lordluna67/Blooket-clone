@@ -10,7 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
 
     <script>
-        // Your Firebase config (use the snippet you provided)
+        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
             authDomain: "blacket-game.firebaseapp.com",
@@ -26,33 +26,37 @@
     </script>
 </head>
 <body>
-    <!-- User display -->
+    <!-- Logged-in user display -->
     <p id="user-display"></p>
 
-    <!-- Your game content goes here -->
+    <!-- Game container -->
     <div id="game-container">
-        <!-- Example: placeholder text -->
-        <p>Welcome to Blacket! Your game will appear here.</p>
+        <!-- Example game elements -->
+        <canvas id="gameCanvas" width="600" height="400" style="border:1px solid #000;"></canvas>
+        <div id="score">
+            Tokens: <span id="tokens">0</span>
+        </div>
+        <button id="earnTokenBtn">Earn Token</button>
     </div>
 
     <script>
         // Check login status
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                // User is logged in
                 document.getElementById("user-display").textContent = "Logged in as: " + user.email;
 
-                // Example: Load tokens from localStorage
+                // Initialize tokens if not set
                 if (!localStorage.getItem(user.email + "_tokens")) {
-                    localStorage.setItem(user.email + "_tokens", 500); // starting tokens
+                    localStorage.setItem(user.email + "_tokens", 500);
                 }
+                updateTokenDisplay();
             } else {
-                // No user logged in, redirect to login page
+                // Redirect to login if not logged in
                 window.location.href = "login.html";
             }
         });
 
-        // Example functions to get/set tokens per user
+        // Token functions
         function getUserTokens() {
             const user = firebase.auth().currentUser;
             if (!user) return 0;
@@ -63,7 +67,29 @@
             const user = firebase.auth().currentUser;
             if (!user) return;
             localStorage.setItem(user.email + "_tokens", amount);
+            updateTokenDisplay();
         }
+
+        function updateTokenDisplay() {
+            document.getElementById("tokens").textContent = getUserTokens();
+        }
+
+        // Example game logic: earn a token
+        const earnBtn = document.getElementById("earnTokenBtn");
+        earnBtn.addEventListener("click", () => {
+            const current = getUserTokens();
+            setUserTokens(current + 1); // increase tokens
+        });
+
+        // Here you can add your actual Blacket game logic
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Example: draw background
+        ctx.fillStyle = "#222";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // TODO: Add your Blacket game elements here
     </script>
 </body>
 </html>
