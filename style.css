@@ -1,15 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px;
-    background-color: #f0f8ff;
-}
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    input {
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 10px;
+body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
+#login-container, #signup-container { max-width: 400px; margin: auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
+input { margin: 5px 0; padding: 8px; width: 90%; }
+button { margin: 5px; padding: 8px 12px; }
