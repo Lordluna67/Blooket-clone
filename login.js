@@ -6,7 +6,7 @@ loginBtn.addEventListener("click", () => {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    if (!email || !password) {
+    if(!email || !password) {
         message.textContent = "Please enter both email and password.";
         return;
     }
@@ -15,9 +15,7 @@ loginBtn.addEventListener("click", () => {
         .then(() => {
             window.location.href = "stats.html";
         })
-        .catch(err => {
-            message.textContent = err.message;
-        });
+        .catch(err => message.textContent = err.message);
 });
 
 signupBtn.addEventListener("click", () => {
