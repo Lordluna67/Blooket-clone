@@ -1,80 +1,99 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+/* style.css - simple dark theme prototype */
+:root {
+  --bg: #0f1113;
+  --panel: #151719;
+  --muted: #9aa3ad;
+  --accent: #ffcc00;
 }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: radial-gradient(circle at 10% 10%, #0b0c0d 0%, var(--bg) 60%);
+  color: #e6eef6;
+}
+
+.center-box {
+  max-width: 520px;
+  margin: 90px auto;
+  padding: 28px;
+  background: var(--panel);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+}
+
+.links a { margin: 8px; display:inline-block; }
+button {
+  border: none;
+  background: var(--accent);
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: default; }
 
 input {
-    padding: 10px;
-    margin: 5px;
-    width: 200px;
-    border-radius: 5px;
-    border: none;
+  display:block;
+  width: 100%;
+  max-width: 360px;
+  margin: 10px auto;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #222;
+  background: #0d0f11;
+  color: #fff;
 }
 
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 5px;
-    border: none;
-    background-color: #ffcc00;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #ffaa00;
-}
-
-#tabs {
-    margin-bottom: 20px;
-}
-
-#tabs button {
-    margin: 0 5px;
-}
-
-#gameCanvas {
-    border: 2px solid #fff;
-    margin-top: 20px;
-}
-/* SIDEBAR */
+/* App layout */
 #sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 180px;
-    height: 100%;
-    background: #202020;
-    color: white;
-    padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 180px;
+  background: #0b0c0d;
+  padding: 20px;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+}
+#sidebar h2 { margin: 0 0 14px 0; font-size:18px; color:var(--accent); text-align:center; }
+.side-btn {
+  display:block;
+  width:100%;
+  margin:8px 0;
+  padding:8px;
+  border-radius:8px;
+  background:#151618;
+  color:#ddd;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+}
+.side-btn:hover { background: #202225; color: #fff; }
+
+#content { margin-left: 200px; padding: 28px; }
+.box {
+  background: #121315;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  max-width: 900px;
 }
 
-#sidebar h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-}
+.message { margin-top:8px; color: var(--muted); }
 
-#sidebar a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    margin: 5px 0;
-    background: #333;
-    border-radius: 6px;
+/* Market items */
+.market-item, .inv-item {
+  padding: 10px;
+  margin: 8px 0;
+  background: #0d0e10;
+  border-radius: 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-
-#sidebar a:hover {
-    background: #444;
-}
-
-/* MAIN CONTENT */
-#content {
-    margin-left: 200px;
-    padding: 20px;
-}
+.market-item button { background: #2a7a2a; color: #fff; padding:6px 10px; border-radius:6px; }
+.market-item button:hover { opacity:0.9; }
