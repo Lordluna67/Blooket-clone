@@ -4,25 +4,6 @@
     <meta charset="UTF-8">
     <title>Sign Up - Blacket</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Firebase SDKs (compat version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-
-    <!-- Firebase config -->
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDpYoktMVRAeNm6TU-y54Ckmdkmfei_iRA",
-            authDomain: "blacket-game.firebaseapp.com",
-            projectId: "blacket-game",
-            storageBucket: "blacket-game.firebasestorage.app",
-            messagingSenderId: "82935109494",
-            appId: "1:82935109494:web:48d1cdf9cf89973ead8c57"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
-
-    <script src="signup.js" defer></script>
 </head>
 <body>
     <div id="signup-container">
@@ -32,5 +13,9 @@
         <button id="register-btn">Create Account</button>
         <p id="message"></p>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+    <script src="signup.js"></script>
 </body>
 </html>
