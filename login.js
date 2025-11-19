@@ -1,16 +1,20 @@
-// login.js (only used if you included it separately)
-document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("login-btn");
-  if (!loginBtn) return;
-  loginBtn.addEventListener("click", () => {
-    const email = document.getElementById("login-email").value.trim();
-    const password = document.getElementById("login-password").value;
-    const res = loginLocal(email, password);
-    const msg = document.getElementById("login-message");
-    if (!res.ok) {
-      msg.textContent = res.message; msg.style.color = "crimson";
-      return;
-    }
-    window.location.href = "stats.html";
-  });
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login — Blacket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
+  <script src="login.js" defer></script>
+</head>
+<body>
+  <div class="center-box">
+    <h1>Login</h1>
+    <input id="login-email" type="email" placeholder="email@example.com" />
+    <input id="login-password" type="password" placeholder="password" />
+    <button id="login-btn">Log in</button>
+    <p id="login-message" class="message"></p>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+</body>
+</html>
