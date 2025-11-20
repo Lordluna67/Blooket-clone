@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Login — Blacket</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="auth.js" defer></script>
-  <script src="login.js" defer></script>
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="login.js"></script>
 </head>
 <body>
-  <div class="center-box">
-    <h1>Login</h1>
-    <input id="login-email" type="email" placeholder="email@example.com" />
-    <input id="login-password" type="password" placeholder="password" />
-    <button id="login-btn">Log in</button>
-    <p id="login-message" class="message"></p>
-    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-  </div>
+<h1>Login</h1>
+<form id="loginForm">
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button>Login</button>
+</form>
 </body>
 </html>
