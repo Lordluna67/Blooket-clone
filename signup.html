@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Signup</title>
-<link rel="stylesheet" href="style.css">
-<script defer src="signup.js"></script>
-</head>
-<body>
-<h1>Create Account</h1>
-<form id="signupForm">
-<input id="newUser" placeholder="Username">
-<input id="newPass" type="password" placeholder="Password">
-<button>Create Account</button>
-</form>
-</body>
-</html>
+document.getElementById("signupForm").onsubmit = (e)=>{
+e.preventDefault();
+location.href = "login.html";
+};
