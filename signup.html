@@ -1,4 +1,20 @@
-document.getElementById("signupForm").onsubmit = (e)=>{
-e.preventDefault();
-location.href = "login.html";
-};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sign Up — Blacket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
+  <script src="signup.js" defer></script>
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <h1>Create account</h1>
+    <input id="signup-email" placeholder="Email (you@example.com)" type="email" />
+    <input id="signup-pass" placeholder="Password (min 6 chars)" type="password" />
+    <button id="signup-button">Create account</button>
+    <p id="signup-message" class="msg"></p>
+    <p>Already have an account? <a href="login.html">Log in</a></p>
+  </div>
+</body>
+</html>
