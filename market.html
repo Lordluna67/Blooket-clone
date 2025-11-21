@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Market</title>
-<link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <title>Market — Blacket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
-<nav class="sidebar">
-<a href="stats.html">Stats</a>
-<a href="market.html" class="active">Market</a>
-<a href="blooks.html">Blooks</a>
-</nav>
+  <div id="sidebar" class="sidebar">
+    <div class="logo">Blacket</div>
+    <button class="nav-btn" data-target="stats">Stats</button>
+    <button class="nav-btn" data-target="market">Market</button>
+    <button class="nav-btn" data-target="bizzar">Bizzar</button>
+    <button class="nav-btn" data-target="blooks">Blooks</button>
+    <div class="spacer"></div>
+    <button id="logout-btn" class="danger">Log out</button>
+  </div>
 
+  <main class="main">
+    <header class="topbar">
+      <div id="page-title">Market</div>
+      <div id="user-info">Not logged in</div>
+    </header>
 
-<main>
-<h1>Medieval Pack — 25 Tokens</h1>
-<button id="buyPack">Buy Pack</button>
-<div id="packResult"></div>
-</main>
+    <section id="page-content" class="content-area">
+      <!-- Market rendered by app.js -->
+    </section>
+  </main>
 </body>
 </html>
