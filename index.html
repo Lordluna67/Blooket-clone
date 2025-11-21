@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Blook Game</title>
-<link rel="stylesheet" href="style.css">
-<script defer src="app.js"></script>
+  <meta charset="utf-8" />
+  <title>Blacket — Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
-<nav class="sidebar">
-<a href="stats.html">Stats</a>
-<a href="market.html">Market</a>
-<a href="blooks.html">Blooks</a>
-</nav>
-<main>
-<h1>Welcome to the Blook Game!</h1>
-</main>
+  <div id="sidebar" class="sidebar">
+    <div class="logo">Blacket</div>
+    <button class="nav-btn" data-target="stats">Stats</button>
+    <button class="nav-btn" data-target="market">Market</button>
+    <button class="nav-btn" data-target="bizzar">Bizzar</button>
+    <button class="nav-btn" data-target="blooks">Blooks</button>
+    <div class="spacer"></div>
+    <button id="logout-btn" class="danger">Log out</button>
+  </div>
+
+  <main class="main">
+    <header class="topbar">
+      <div id="page-title">Stats</div>
+      <div id="user-info">Not logged in</div>
+    </header>
+
+    <section id="page-content" class="content-area">
+      <!-- app.js will render the content here -->
+    </section>
+  </main>
 </body>
 </html>
