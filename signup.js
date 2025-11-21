@@ -1,18 +1,18 @@
-// signup.js (calls auth.js signupLocal)
+// signup.js - page script for signup.html
 document.addEventListener("DOMContentLoaded", () => {
-  const signupBtn = document.getElementById("signup-btn");
-  if (!signupBtn) return;
-  signupBtn.addEventListener("click", () => {
+  const btn = document.getElementById("signup-button");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
     const email = document.getElementById("signup-email").value.trim();
-    const password = document.getElementById("signup-password").value;
-    const res = signupLocal(email, password);
+    const pass = document.getElementById("signup-pass").value;
     const msg = document.getElementById("signup-message");
+    const res = signupLocal(email, pass);
     if (!res.ok) {
-      msg.textContent = res.message; msg.style.color = "crimson";
+      if (msg) { msg.textContent = res.message; msg.style.color = "crimson"; }
+      else alert(res.message);
       return;
     }
-    // initialize data keys
-    _writeUser({ tokens: 0, nextSpin: 0, blooks: {} });
-    window.location.href = "stats.html";
+    // success: go to index
+    window.location.href = "index.html";
   });
 });
